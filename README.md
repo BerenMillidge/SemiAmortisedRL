@@ -1,2 +1,2 @@
-# SemiAmortisedRL
-Experiments and code for experimenting with Semi-amortised actor-critic and planning networks in RL
+# fe_mbrl
+free-energy model based reinforcement learning. My original fork of alec's pmbrl
