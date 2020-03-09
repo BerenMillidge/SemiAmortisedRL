@@ -1,13 +1,3 @@
-"""
-scp -r pmbrl at449@allocortex.inf.susx.ac.uk:/its/home/at449/
-scp -r at449@allocortex.inf.susx.ac.uk:/its/home/at449/pmbrl pmbrl
-nohup python main.py &
-ps -ef
-kill PID
-"""
-# pylint: disable=not-callable
-# pylint: disable=no-member
-
 import gym
 import torch
 import numpy as np
@@ -19,10 +9,11 @@ from datetime import datetime
 #from pmbrl.env import GymEnv, NoisyEnv
 from pmbrl.normalizer import TransitionNormalizer
 from pmbrl.buffer import Buffer
-from pmbrl.models import EnsembleModel, RewardModel, EnsembleRewardModel
+from pmbrl.models import EnsembleModel, RewardModel, EnsembleRewardModel, ActionModel, ValueModel
 from pmbrl.planner import CEMPlanner, PIPlanner, RandomShootingPlanner
 from pmbrl.agent import Agent
 from pmbrl import tools
+import pmbrl.actor_critic_utils as utils
 try:
     import pybullet
 except:
@@ -46,6 +37,14 @@ def main(args):
     print("ARGS RENDER: ", args.render)
     print("ARGS SAVE MODEL: ", args.save_model)
     print("ARGS EXPLORATION: ", args.use_exploration)
+    # terible global, but oh well...
+
+    if args.projection_horizon == -1:
+        args.projection_horizon = args.plan_horizon # set this up as the default
+
+    args.DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    args.DISCOUNT_MATRIX = utils.create_discount_matrix(args)
+    DEVICE = args.DEVICE
     if args.env_name == "SparseHalfCheetah" or args.env_name == "SparseCartpoleSwingup":
         try:
             import roboschool
@@ -86,8 +85,16 @@ def main(args):
         reward_model = EnsembleRewardModel(state_size, args.hidden_size, args.ensemble_size,device=DEVICE)
     else:
         reward_model = RewardModel(state_size, args.hidden_size,device=DEVICE)
+
+    actor = ActionModel(state_size, args.hidden_size,action_size,device=DEVICE)
+    critic = ValueModel(state_size, args.hidden_size, device=DEVICE)
+    actor_params = list(actor.parameters())
+    critic_params =list(critic.parameters())
+
     params = list(ensemble.parameters()) + list(reward_model.parameters())
     optim = torch.optim.Adam(params, lr=args.learning_rate, eps=args.epsilon)
+    actor_optim = torch.optim.Adam(actor_params, lr=args.learning_rate, eps=args.epsilon)
+    critic_optim = torch.optim.Adam(critic_params, lr=args.learning_rate, eps=args.epsilon)
     print("USE EXPLORATION: ", args.use_exploration)
 
     if args.planner == "CEM":
@@ -122,7 +129,11 @@ def main(args):
         args.use_reward_info_gain,
         device=DEVICE
         )
-    agent = Agent(env, planner,args.use_epsilon_greedy, args.epsilon_greedy_value)
+
+    agent = Agent(env, planner,actor,args.use_epsilon_greedy, args.epsilon_greedy_value,args.use_actor)
+    # I have to make a decision on whether to reset all my models or not, which is going to be really frustrating
+    #ugh.
+
 
     if tools.logdir_exists(args.logdir) and True == False:
         tools.log("Loading existing _logdir_ at {}".format(args.logdir))
@@ -166,31 +177,58 @@ def main(args):
         for epoch in range(args.n_train_epochs):
             e_losses = []
             r_losses = []
+            a_losses = []
+            c_losses = []
 
             for (states, actions, rewards, delta_states) in buffer.get_train_batches(
                 args.batch_size
             ):
                 ensemble.train()
                 reward_model.train()
+                actor.train()
+                critic.train()
                 optim.zero_grad()
 
                 e_loss = ensemble.loss(states, actions, delta_states)
                 r_loss = reward_model.loss(states, rewards)
                 e_losses.append(e_loss.item())
                 r_losses.append(r_loss.item())
-                (e_loss + r_loss).backward()
+                (e_loss + r_loss).backward(retain_graph=False)
                 torch.nn.utils.clip_grad_norm_(params, args.grad_clip_norm, norm_type=2)
                 optim.step()
 
+                if args.use_actor:
+                    actor_optim.zero_grad()
+                    critic_optim.zero_grad()
+                    verbose = True if epoch % 10 == 0 else False
+                    actor_loss, critic_loss = utils.actor_critic_loss(states, ensemble, reward_model, actor, critic, args,verbose=verbose)
+                    #do actor loss first
+                    actor_loss.backward(retain_graph=True)
+                    torch.nn.utils.clip_grad_norm_(actor_params, args.grad_clip_norm, norm_type=2)
+                    actor_optim.step()
+                    #critic loss:
+                    critic_optim.zero_grad()
+                    actor_optim.zero_grad()
+                    critic_loss.backward(retain_graph=False)
+                    torch.nn.utils.clip_grad_norm_(critic_params, args.grad_clip_norm, norm_type=2)
+                    critic_optim.step()
+                    a_losses.append(actor_loss.item())
+                    c_losses.append(critic_loss.item())
+
+
+
+
             if epoch % args.log_every == 0 and epoch > 0:
-                message = "> Epoch {} [ ensemble {:.2f} | rew {:.2f}]"
+                message = "> Epoch {} [ ensemble {:.2f} | rew {:.2f} | actor {:.2f} | critic {:.2f}]"
                 tools.log(
-                    message.format(epoch, sum(e_losses) / epoch, sum(r_losses) / epoch)
+                    message.format(epoch, sum(e_losses) / epoch, sum(r_losses) / epoch, sum(a_losses)/epoch, sum(c_losses)/epoch)
                 )
         metrics["ensemble_loss"].append(sum(e_losses))
         metrics["reward_loss"].append(sum(r_losses))
-        message = "Losses: [ensemble {} | reward {}]"
-        tools.log(message.format(sum(e_losses), sum(r_losses)))
+        metrics["actor_loss"].append(sum(a_losses))
+        metrics["critic_loss"].append(sum(c_losses))
+        message = "Losses: [ensemble {} | reward {} | actor {} | critic {}]"
+        tools.log(message.format(sum(e_losses), sum(r_losses),sum(a_losses), sum(c_losses)))
         end_time_training = time.process_time() - start_time_training
         tools.log("Total training time: {:.2f}".format(end_time_training))
 
@@ -266,11 +304,8 @@ if __name__ == "__main__":
         return str(x).lower() in ["true", "1", "yes"]
 
     parser = argparse.ArgumentParser()
-    DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
-
-    parser.add_argument("--logdir", type=str, default="log-cheetah")
-    parser.add_argument("--env_name", type=str, default="SparseCartpoleSwingup")
+    parser.add_argument("--logdir", type=str, default="test_pendulum")
+    parser.add_argument("--env_name", type=str, default="Pendulum-v1")
     parser.add_argument("--max_episode_len", type=int, default=500)
     parser.add_argument("--action_repeat", type=int, default=3)
     parser.add_argument("--env_std", type=float, default=0.00)
@@ -284,10 +319,10 @@ if __name__ == "__main__":
     parser.add_argument("--n_candidates", type=int, default=700)
     parser.add_argument("--optimisation_iters", type=int, default=7)
     parser.add_argument("--top_candidates", type=int, default=70)
-    parser.add_argument("--n_seed_episodes", type=int, default=5)
-    parser.add_argument("--n_train_epochs", type=int, default=5)
+    parser.add_argument("--n_seed_episodes", type=int, default=20)
+    parser.add_argument("--n_train_epochs", type=int, default=100)
     parser.add_argument("--n_episodes", type=int, default=1000)
-    parser.add_argument("--batch_size", type=int, default=32)
+    parser.add_argument("--batch_size", type=int, default=200)
     parser.add_argument("--grad_clip_norm", type=int, default=1000)
     parser.add_argument("--log_every", type=int, default=20)
     parser.add_argument("--save_every", type=int, default=20)
@@ -303,7 +338,11 @@ if __name__ == "__main__":
     parser.add_argument("--save_path", type=str, default="/home/s1686853/default_save")
     parser.add_argument("--use_epsilon_greedy", type=boolcheck, default=False)
     parser.add_argument("--epsilon_greedy_value", type=float, default=0.0)
-    #parser.add_argument("--save_model", type=boolcheck, default=True)
+    # actor-critic arguments
+    parser.add_argument("--use_actor", type=boolcheck, default=True)
+    parser.add_argument("--gamma", type=float, default=0.99)
+    parser.add_argument("--projection_horizon",type=int,default=-1)
+
 
 
     args = parser.parse_args()

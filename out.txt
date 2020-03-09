@@ -1,0 +1,87 @@
+
+ === Loading experiment ===
+Namespace(action_noise=0.0, action_repeat=3, batch_size=32, buffer_size=1000000, collect_trajectories=False, ensemble_size=10, env_name='SparseCartpoleSwingup', env_std=0.0, epsilon=0.0001, epsilon_greedy_value=0.0, expl_scale=1, gamma=0.99, grad_clip_norm=1000, hidden_size=200, learning_rate=0.0001, log_every=20, logdir='log-cheetah', max_episode_len=500, n_candidates=700, n_episodes=1000, n_seed_episodes=5, n_train_epochs=5, optimisation_iters=7, plan_horizon=30, planner='CEM', projection_horizon=-1, render=False, save_every=20, save_path='/home/s1686853/default_save', top_candidates=70, trajectory_savedir='trajectories/', use_actor=True, use_ensemble_reward_model=False, use_epsilon_greedy=False, use_exploration=False, use_reward=True, use_reward_info_gain=False)
+ === Loading experiment ===
+Namespace(action_noise=0.0, action_repeat=3, batch_size=32, buffer_size=1000000, collect_trajectories=False, ensemble_size=10, env_name='SparseCartpoleSwingup', env_std=0.0, epsilon=0.0001, epsilon_greedy_value=0.0, expl_scale=1, gamma=0.99, grad_clip_norm=1000, hidden_size=200, learning_rate=0.0001, log_every=20, logdir='log-cheetah', max_episode_len=500, n_candidates=700, n_episodes=1000, n_seed_episodes=5, n_train_epochs=5, optimisation_iters=7, plan_horizon=30, planner='CEM', projection_horizon=-1, render=False, save_every=20, save_path='/home/s1686853/default_save', top_candidates=70, trajectory_savedir='trajectories/', use_actor=True, use_ensemble_reward_model=False, use_epsilon_greedy=False, use_exploration=False, use_reward=True, use_reward_info_gain=False)
+Collected seeds: [5 episodes] [835 frames]
+
+ === Episode 0 ===
+Training on 835 data points
+ === Loading experiment ===
+Namespace(action_noise=0.0, action_repeat=3, batch_size=32, buffer_size=1000000, collect_trajectories=False, ensemble_size=10, env_name='SparseCartpoleSwingup', env_std=0.0, epsilon=0.0001, epsilon_greedy_value=0.0, expl_scale=1, gamma=0.99, grad_clip_norm=1000, hidden_size=200, learning_rate=0.0001, log_every=20, logdir='log-cheetah', max_episode_len=500, n_candidates=700, n_episodes=1000, n_seed_episodes=5, n_train_epochs=5, optimisation_iters=7, plan_horizon=30, planner='CEM', projection_horizon=-1, render=False, save_every=20, save_path='/home/s1686853/default_save', top_candidates=70, trajectory_savedir='trajectories/', use_actor=True, use_ensemble_reward_model=False, use_epsilon_greedy=False, use_exploration=False, use_reward=True, use_reward_info_gain=False)
+Collected seeds: [5 episodes] [835 frames]
+
+ === Episode 0 ===
+Training on 835 data points
+ === Loading experiment ===
+Namespace(action_noise=0.0, action_repeat=3, batch_size=32, buffer_size=1000000, collect_trajectories=False, ensemble_size=10, env_name='SparseCartpoleSwingup', env_std=0.0, epsilon=0.0001, epsilon_greedy_value=0.0, expl_scale=1, gamma=0.99, grad_clip_norm=1000, hidden_size=200, learning_rate=0.0001, log_every=20, logdir='log-cheetah', max_episode_len=500, n_candidates=700, n_episodes=1000, n_seed_episodes=5, n_train_epochs=5, optimisation_iters=7, plan_horizon=30, planner='CEM', projection_horizon=-1, render=False, save_every=20, save_path='/home/s1686853/default_save', top_candidates=70, trajectory_savedir='trajectories/', use_actor=True, use_ensemble_reward_model=False, use_epsilon_greedy=False, use_exploration=False, use_reward=True, use_reward_info_gain=False)
+Collected seeds: [5 episodes] [835 frames]
+
+ === Episode 0 ===
+Training on 835 data points
+ === Loading experiment ===
+Namespace(action_noise=0.0, action_repeat=3, batch_size=32, buffer_size=1000000, collect_trajectories=False, ensemble_size=10, env_name='SparseCartpoleSwingup', env_std=0.0, epsilon=0.0001, epsilon_greedy_value=0.0, expl_scale=1, gamma=0.99, grad_clip_norm=1000, hidden_size=200, learning_rate=0.0001, log_every=20, logdir='log-cheetah', max_episode_len=500, n_candidates=700, n_episodes=1000, n_seed_episodes=5, n_train_epochs=5, optimisation_iters=7, plan_horizon=30, planner='CEM', projection_horizon=-1, render=False, save_every=20, save_path='/home/s1686853/default_save', top_candidates=70, trajectory_savedir='trajectories/', use_actor=True, use_ensemble_reward_model=False, use_epsilon_greedy=False, use_exploration=False, use_reward=True, use_reward_info_gain=False)
+ === Loading experiment ===
+Namespace(action_noise=0.0, action_repeat=3, batch_size=32, buffer_size=1000000, collect_trajectories=False, ensemble_size=10, env_name='SparseCartpoleSwingup', env_std=0.0, epsilon=0.0001, epsilon_greedy_value=0.0, expl_scale=1, gamma=0.99, grad_clip_norm=1000, hidden_size=200, learning_rate=0.0001, log_every=20, logdir='log-cheetah', max_episode_len=500, n_candidates=700, n_episodes=1000, n_seed_episodes=5, n_train_epochs=5, optimisation_iters=7, plan_horizon=30, planner='CEM', projection_horizon=-1, render=False, save_every=20, save_path='/home/s1686853/default_save', top_candidates=70, trajectory_savedir='trajectories/', use_actor=True, use_ensemble_reward_model=False, use_epsilon_greedy=False, use_exploration=False, use_reward=True, use_reward_info_gain=False)
+Collected seeds: [5 episodes] [835 frames]
+
+ === Episode 0 ===
+Training on 835 data points
+ === Loading experiment ===
+Namespace(action_noise=0.0, action_repeat=3, batch_size=32, buffer_size=1000000, collect_trajectories=False, ensemble_size=10, env_name='SparseCartpoleSwingup', env_std=0.0, epsilon=0.0001, epsilon_greedy_value=0.0, expl_scale=1, gamma=0.99, grad_clip_norm=1000, hidden_size=200, learning_rate=0.0001, log_every=20, logdir='log-cheetah', max_episode_len=500, n_candidates=700, n_episodes=1000, n_seed_episodes=5, n_train_epochs=5, optimisation_iters=7, plan_horizon=30, planner='CEM', projection_horizon=-1, render=False, save_every=20, save_path='/home/s1686853/default_save', top_candidates=70, trajectory_savedir='trajectories/', use_actor=True, use_ensemble_reward_model=False, use_epsilon_greedy=False, use_exploration=False, use_reward=True, use_reward_info_gain=False)
+Collected seeds: [5 episodes] [835 frames]
+
+ === Episode 0 ===
+Training on 835 data points
+ === Loading experiment ===
+Namespace(action_noise=0.0, action_repeat=3, batch_size=32, buffer_size=1000000, collect_trajectories=False, ensemble_size=10, env_name='SparseCartpoleSwingup', env_std=0.0, epsilon=0.0001, epsilon_greedy_value=0.0, expl_scale=1, gamma=0.99, grad_clip_norm=1000, hidden_size=200, learning_rate=0.0001, log_every=20, logdir='log-cheetah', max_episode_len=500, n_candidates=700, n_episodes=1000, n_seed_episodes=5, n_train_epochs=5, optimisation_iters=7, plan_horizon=30, planner='CEM', projection_horizon=-1, render=False, save_every=20, save_path='/home/s1686853/default_save', top_candidates=70, trajectory_savedir='trajectories/', use_actor=True, use_ensemble_reward_model=False, use_epsilon_greedy=False, use_exploration=False, use_reward=True, use_reward_info_gain=False)
+Collected seeds: [5 episodes] [835 frames]
+
+ === Episode 0 ===
+Training on 835 data points
+ === Loading experiment ===
+Namespace(action_noise=0.0, action_repeat=3, batch_size=32, buffer_size=1000000, collect_trajectories=False, ensemble_size=10, env_name='SparseCartpoleSwingup', env_std=0.0, epsilon=0.0001, epsilon_greedy_value=0.0, expl_scale=1, gamma=0.99, grad_clip_norm=1000, hidden_size=200, learning_rate=0.0001, log_every=20, logdir='log-cheetah', max_episode_len=500, n_candidates=700, n_episodes=1000, n_seed_episodes=5, n_train_epochs=5, optimisation_iters=7, plan_horizon=30, planner='CEM', projection_horizon=-1, render=False, save_every=20, save_path='/home/s1686853/default_save', top_candidates=70, trajectory_savedir='trajectories/', use_actor=True, use_ensemble_reward_model=False, use_epsilon_greedy=False, use_exploration=False, use_reward=True, use_reward_info_gain=False)
+Collected seeds: [5 episodes] [835 frames]
+
+ === Episode 0 ===
+Training on 835 data points
+ === Loading experiment ===
+Namespace(action_noise=0.0, action_repeat=3, batch_size=32, buffer_size=1000000, collect_trajectories=False, ensemble_size=10, env_name='SparseCartpoleSwingup', env_std=0.0, epsilon=0.0001, epsilon_greedy_value=0.0, expl_scale=1, gamma=0.99, grad_clip_norm=1000, hidden_size=200, learning_rate=0.0001, log_every=20, logdir='log-cheetah', max_episode_len=500, n_candidates=700, n_episodes=1000, n_seed_episodes=5, n_train_epochs=5, optimisation_iters=7, plan_horizon=30, planner='CEM', projection_horizon=-1, render=False, save_every=20, save_path='/home/s1686853/default_save', top_candidates=70, trajectory_savedir='trajectories/', use_actor=True, use_ensemble_reward_model=False, use_epsilon_greedy=False, use_exploration=False, use_reward=True, use_reward_info_gain=False)
+ === Loading experiment ===
+Namespace(action_noise=0.0, action_repeat=3, batch_size=32, buffer_size=1000000, collect_trajectories=False, ensemble_size=10, env_name='SparseCartpoleSwingup', env_std=0.0, epsilon=0.0001, epsilon_greedy_value=0.0, expl_scale=1, gamma=0.99, grad_clip_norm=1000, hidden_size=200, learning_rate=0.0001, log_every=20, logdir='log-cheetah', max_episode_len=500, n_candidates=700, n_episodes=1000, n_seed_episodes=5, n_train_epochs=5, optimisation_iters=7, plan_horizon=30, planner='CEM', projection_horizon=-1, render=False, save_every=20, save_path='/home/s1686853/default_save', top_candidates=70, trajectory_savedir='trajectories/', use_actor=True, use_ensemble_reward_model=False, use_epsilon_greedy=False, use_exploration=False, use_reward=True, use_reward_info_gain=False)
+ === Loading experiment ===
+Namespace(action_noise=0.0, action_repeat=3, batch_size=32, buffer_size=1000000, collect_trajectories=False, ensemble_size=10, env_name='SparseCartpoleSwingup', env_std=0.0, epsilon=0.0001, epsilon_greedy_value=0.0, expl_scale=1, gamma=0.99, grad_clip_norm=1000, hidden_size=200, learning_rate=0.0001, log_every=20, logdir='log-cheetah', max_episode_len=500, n_candidates=700, n_episodes=1000, n_seed_episodes=5, n_train_epochs=5, optimisation_iters=7, plan_horizon=30, planner='CEM', projection_horizon=-1, render=False, save_every=20, save_path='/home/s1686853/default_save', top_candidates=70, trajectory_savedir='trajectories/', use_actor=True, use_ensemble_reward_model=False, use_epsilon_greedy=False, use_exploration=False, use_reward=True, use_reward_info_gain=False)
+ === Loading experiment ===
+Namespace(action_noise=0.0, action_repeat=3, batch_size=32, buffer_size=1000000, collect_trajectories=False, ensemble_size=10, env_name='SparseCartpoleSwingup', env_std=0.0, epsilon=0.0001, epsilon_greedy_value=0.0, expl_scale=1, gamma=0.99, grad_clip_norm=1000, hidden_size=200, learning_rate=0.0001, log_every=20, logdir='log-cheetah', max_episode_len=500, n_candidates=700, n_episodes=1000, n_seed_episodes=5, n_train_epochs=5, optimisation_iters=7, plan_horizon=30, planner='CEM', projection_horizon=-1, render=False, save_every=20, save_path='/home/s1686853/default_save', top_candidates=70, trajectory_savedir='trajectories/', use_actor=True, use_ensemble_reward_model=False, use_epsilon_greedy=False, use_exploration=False, use_reward=True, use_reward_info_gain=False)
+ === Loading experiment ===
+Namespace(action_noise=0.0, action_repeat=3, batch_size=32, buffer_size=1000000, collect_trajectories=False, ensemble_size=10, env_name='SparseCartpoleSwingup', env_std=0.0, epsilon=0.0001, epsilon_greedy_value=0.0, expl_scale=1, gamma=0.99, grad_clip_norm=1000, hidden_size=200, learning_rate=0.0001, log_every=20, logdir='log-cheetah', max_episode_len=500, n_candidates=700, n_episodes=1000, n_seed_episodes=5, n_train_epochs=5, optimisation_iters=7, plan_horizon=30, planner='CEM', projection_horizon=-1, render=False, save_every=20, save_path='/home/s1686853/default_save', top_candidates=70, trajectory_savedir='trajectories/', use_actor=True, use_ensemble_reward_model=False, use_epsilon_greedy=False, use_exploration=False, use_reward=True, use_reward_info_gain=False)
+ === Loading experiment ===
+Namespace(action_noise=0.0, action_repeat=3, batch_size=32, buffer_size=1000000, collect_trajectories=False, ensemble_size=10, env_name='SparseCartpoleSwingup', env_std=0.0, epsilon=0.0001, epsilon_greedy_value=0.0, expl_scale=1, gamma=0.99, grad_clip_norm=1000, hidden_size=200, learning_rate=0.0001, log_every=20, logdir='log-cheetah', max_episode_len=500, n_candidates=700, n_episodes=1000, n_seed_episodes=5, n_train_epochs=5, optimisation_iters=7, plan_horizon=30, planner='CEM', projection_horizon=-1, render=False, save_every=20, save_path='/home/s1686853/default_save', top_candidates=70, trajectory_savedir='trajectories/', use_actor=True, use_ensemble_reward_model=False, use_epsilon_greedy=False, use_exploration=False, use_reward=True, use_reward_info_gain=False)
+Collected seeds: [5 episodes] [835 frames]
+
+ === Episode 0 ===
+Training on 835 data points
+ === Loading experiment ===
+Namespace(action_noise=0.0, action_repeat=3, batch_size=32, buffer_size=1000000, collect_trajectories=False, ensemble_size=10, env_name='SparseCartpoleSwingup', env_std=0.0, epsilon=0.0001, epsilon_greedy_value=0.0, expl_scale=1, gamma=0.99, grad_clip_norm=1000, hidden_size=200, learning_rate=0.0001, log_every=20, logdir='log-cheetah', max_episode_len=500, n_candidates=700, n_episodes=1000, n_seed_episodes=5, n_train_epochs=5, optimisation_iters=7, plan_horizon=30, planner='CEM', projection_horizon=-1, render=False, save_every=20, save_path='/home/s1686853/default_save', top_candidates=70, trajectory_savedir='trajectories/', use_actor=True, use_ensemble_reward_model=False, use_epsilon_greedy=False, use_exploration=False, use_reward=True, use_reward_info_gain=False)
+Collected seeds: [5 episodes] [835 frames]
+
+ === Episode 0 ===
+Training on 835 data points
+ === Loading experiment ===
+Namespace(action_noise=0.0, action_repeat=3, batch_size=32, buffer_size=1000000, collect_trajectories=False, ensemble_size=10, env_name='SparseCartpoleSwingup', env_std=0.0, epsilon=0.0001, epsilon_greedy_value=0.0, expl_scale=1, gamma=0.99, grad_clip_norm=1000, hidden_size=200, learning_rate=0.0001, log_every=20, logdir='log-cheetah', max_episode_len=500, n_candidates=700, n_episodes=1000, n_seed_episodes=5, n_train_epochs=5, optimisation_iters=7, plan_horizon=30, planner='CEM', projection_horizon=-1, render=False, save_every=20, save_path='/home/s1686853/default_save', top_candidates=70, trajectory_savedir='trajectories/', use_actor=True, use_ensemble_reward_model=False, use_epsilon_greedy=False, use_exploration=False, use_reward=True, use_reward_info_gain=False)
+Collected seeds: [5 episodes] [835 frames]
+
+ === Episode 0 ===
+Training on 835 data points
+ === Loading experiment ===
+Namespace(action_noise=0.0, action_repeat=3, batch_size=32, buffer_size=1000000, collect_trajectories=False, ensemble_size=10, env_name='SparseCartpoleSwingup', env_std=0.0, epsilon=0.0001, epsilon_greedy_value=0.0, expl_scale=1, gamma=0.99, grad_clip_norm=1000, hidden_size=200, learning_rate=0.0001, log_every=20, logdir='log-cheetah', max_episode_len=500, n_candidates=700, n_episodes=1000, n_seed_episodes=5, n_train_epochs=5, optimisation_iters=7, plan_horizon=30, planner='CEM', projection_horizon=-1, render=False, save_every=20, save_path='/home/s1686853/default_save', top_candidates=70, trajectory_savedir='trajectories/', use_actor=True, use_ensemble_reward_model=False, use_epsilon_greedy=False, use_exploration=False, use_reward=True, use_reward_info_gain=False)
+Collected seeds: [5 episodes] [835 frames]
+
+ === Episode 0 ===
+Training on 835 data points
+ === Loading experiment ===
+Namespace(action_noise=0.0, action_repeat=3, batch_size=32, buffer_size=1000000, collect_trajectories=False, ensemble_size=10, env_name='SparseCartpoleSwingup', env_std=0.0, epsilon=0.0001, epsilon_greedy_value=0.0, expl_scale=1, gamma=0.99, grad_clip_norm=1000, hidden_size=200, learning_rate=0.0001, log_every=20, logdir='log-cheetah', max_episode_len=500, n_candidates=700, n_episodes=1000, n_seed_episodes=5, n_train_epochs=5, optimisation_iters=7, plan_horizon=30, planner='CEM', projection_horizon=-1, render=False, save_every=20, save_path='/home/s1686853/default_save', top_candidates=70, trajectory_savedir='trajectories/', use_actor=True, use_ensemble_reward_model=False, use_epsilon_greedy=False, use_exploration=False, use_reward=True, use_reward_info_gain=False)
+Collected seeds: [5 episodes] [835 frames]
+
+ === Episode 0 ===
+Training on 835 data points

@@ -11,12 +11,14 @@ from copy import deepcopy
 
 
 class Agent(object):
-    def __init__(self, env, planner,use_epsilon_greedy, epsilon):
+    def __init__(self, env, planner,actor, use_epsilon_greedy, epsilon,use_actor):
         self.env = env
         self.planner = planner
+        self.actor = actor
         self.stats_sample_reward = 0.1
         self.use_epsilon_greedy = use_epsilon_greedy
         self.epsilon = epsilon
+        self.use_actor = use_actor
         self.reward_stats_samples = []
         self.info_stats_samples = []
         self.reward_IG_stats_samples = []
@@ -36,6 +38,32 @@ class Agent(object):
                     break
         return buffer
 
+    def compute_action(self, state):
+        if self.use_actor:
+            return self.compute_actor_action(state)
+        else:
+            return self.compute_planner_action(state)
+
+    def compute_planner_action(self, state):
+        r = np.random.uniform()
+        if r < self.stats_sample_reward:
+            self.planner.return_stats = True
+            action,reward_stats, info_stats,reward_IG_stats = self.planner(state)
+            self.planner.return_stats = False
+            self.reward_stats_samples.append(reward_stats)
+            self.info_stats_samples.append(info_stats)
+            self.reward_IG_stats_samples.append(reward_IG_stats)
+        else:
+            action = self.planner(state)
+
+        action = action.cpu().detach().numpy()
+        return action
+
+    def compute_actor_action(self, state):
+        action,_ = self.actor.from_numpy_forward(state)
+        action = action.cpu().detach().numpy()[0][0]
+        return action
+
     def run_episode(self, buffer=None, action_noise=0.0,render_flag = False, collect_trajectories = False):
         total_reward = 0
         total_steps = 0
@@ -51,31 +79,9 @@ class Agent(object):
                     if rnd <= self.epsilon:
                         action = self.env.sample_action()
                     else:
-                        r = np.random.uniform()
-                        if r < self.stats_sample_reward:
-                            self.planner.return_stats = True
-                            action,reward_stats, info_stats,reward_IG_stats = self.planner(state)
-                            self.planner.return_stats = False
-                            self.reward_stats_samples.append(reward_stats)
-                            self.info_stats_samples.append(info_stats)
-                            self.reward_IG_stats_samples.append(reward_IG_stats)
-                        else:
-                            action = self.planner(state)
-
-                        action = action.cpu().detach().numpy()
+                        self.compute_action(state)
                 else:
-                    r = np.random.uniform()
-                    if r < self.stats_sample_reward:
-                        self.planner.return_stats = True
-                        action,reward_stats, info_stats,reward_IG_stats = self.planner(state)
-                        self.planner.return_stats = False
-                        self.reward_stats_samples.append(reward_stats)
-                        self.info_stats_samples.append(info_stats)
-                        self.reward_IG_stats_samples.append(reward_IG_stats)
-                    else:
-                        action = self.planner(state)
-
-                    action = action.cpu().detach().numpy()
+                    self.compute_action(state)
 
                 if action_noise > 0:
                     action = action + np.random.normal(0, action_noise, action.shape)
@@ -100,6 +106,7 @@ class Agent(object):
         #gc.collect()
 
         if buffer is not None:
+            #got to fix this awful death part at the end. But this is going interestingly. Like it doesn't seem to be THAT hard to transfer across... Now let's see if it works!
             if collect_trajectories:
                 return total_reward, total_steps, buffer,average_stats(self.reward_stats_samples), average_stats(self.info_stats_samples),average_stats(self.reward_IG_stats_samples),trajectories
             else:

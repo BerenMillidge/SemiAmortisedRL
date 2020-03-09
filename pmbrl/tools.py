@@ -89,6 +89,8 @@ def build_metrics():
         "last_save": 0,
         "ensemble_loss": [],
         "reward_loss": [],
+        "actor loss: ": [],
+        "critic loss: ": [],
         "train_rewards": [],
         "train_steps": [],
         "test_rewards": [],
@@ -122,6 +124,22 @@ def _load_pickle(path):
 def _save_pickle(path, obj):
     with open(path, "wb") as pickle_file:
         pickle.dump(obj, pickle_file)
+
+def reset_models(models):
+    for model in models:
+        model.reset_parameters()
+
+def reset_optimizers(models,args):
+    reset_models(models)
+    ensemble, reward, actor, critic = models
+    params = list(ensemble.parameters()) + list(reward.parameters())
+    optim = torch.optim.Adam(params, lr=args.learning_rate, eps=args.epsilon)
+    actor_params = list(actor.parameters())
+    critic_params = list(critic.parameters())
+    actor_optim = torch.optim.Adam(actor_params, lr=args.learning_rate, eps=args.epsilon)
+    critic_optim = torch.optim.Adam(critic_params, lr=args.learning_rate, eps=args.epsilon)
+    return params, optim, actor_params, actor_optim, critic_params, critic_optim
+
 
 
 def log(string):
